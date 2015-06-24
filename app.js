@@ -31,6 +31,11 @@ var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var eventController = require('./controllers/user_event');
 
+/*
+ * DataGeek controllers
+ */
+var dashboardController = require('./controllers/dashboard');
+
 /**
  * API keys and Passport configuration.
  */
@@ -114,6 +119,11 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/getEvents', eventController.getEvents);
 app.post('/getEvents', eventController.postEvents);
+
+/*
+ * DataGeek app routes.
+ */
+app.get('/dashboard', dashboardController.getDashboard);
 
 /**
  * API examples routes.
