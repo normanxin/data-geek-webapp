@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  div(ng-controller="dashboardCtrl")
+    canvas(id="line" class="chart chart-line" data="data" labels="labels" 
+        legend="true" series="series" click="onClick")
