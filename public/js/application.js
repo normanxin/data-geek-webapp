@@ -15,4 +15,8 @@
 
 //= require lib/jquery-2.1.3.min
 //= require lib/bootstrap.min
+//= require lib/Chart.min.js
+//= require lib/angular.min
+//= require lib/angular-chart.min
 //= require main
+//= require dashboard
