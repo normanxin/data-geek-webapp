@@ -1,5 +1,12 @@
 var _ = require('lodash');
 var UserEvent = require('../models/UserEvent');
+var secrets = require('../config/secrets');
+var mongoose = require('mongoose');
+
+mongoose.connect(secrets.db);
+mongoose.connection.on('error', function() {
+      console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+});
 
 // var done = _.after(2, process.exit());
 

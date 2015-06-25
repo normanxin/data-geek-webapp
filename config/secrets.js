@@ -21,9 +21,10 @@
 
 module.exports = {
 
-  // db: process.env.MONGODB || 'mongodb://localhost:27017/test',
+  // db: process.env.MONGODB || 'mongodb://192.168.59.103:27017/hack',
+    db: process.env.MONGODB || 'mongodb://172.16.203.17:27017/hack',
 
-  db: process.env.MONGODB || 'mongodb://' + process.env.DATAGEEKWEBAPP_DB_1_PORT_27017_TCP_ADDR + ':27017/test',
+  // db: process.env.MONGODB || 'mongodb://' + process.env.DATAGEEKWEBAPP_DB_1_PORT_27017_TCP_ADDR + ':27017/hack',
 
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 

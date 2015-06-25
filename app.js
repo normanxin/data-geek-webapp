@@ -114,6 +114,7 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/getEvents', eventController.getEvents);
 app.post('/getEvents', eventController.postEvents);
+app.post('/saveEvents', eventController.saveEvents);
 
 /**
  * API examples routes.
