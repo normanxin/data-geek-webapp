@@ -1,6 +1,7 @@
 var chai = require('chai');
 var should = chai.should();
 var User = require('../models/User');
+var UserEvent = require('../models/UserEvent');
 
 describe('User Model', function() {
   it('should create a new user', function(done) {
@@ -39,4 +40,45 @@ describe('User Model', function() {
       done();
     });
   });
+});
+
+describe('UserEvent Model', function() {
+    it('should create a user event', function(done) {
+        var event = new UserEvent({
+            timestamp: 123455,
+            userName: 'hack@turn.com',
+            eventType: 'keystroke',
+            componentType: 'table',
+            componentID: 'segmentTable',
+            sessionID: 'sid-13143',
+            workflow: 'creativeEdit'
+        });
+        event.save(function(err) {
+            if (err) return done(err);
+            done();
+        });
+    });
+
+    it('should find an event', function(done) {
+        UserEvent.findOne({
+            timestamp: 123455,
+            userName: 'hack@turn.com'},
+            function(err, event) {
+                if (err) return done(err);
+                event.timestamp.should.equal(123455);
+                done();
+            }
+        ); 
+    });
+
+    it('should delete a event', function(done) {
+        UserEvent.remove({
+            timestamp: 123455,
+            userName: 'hack@turn.com'},
+            function(err, event) {
+                if (err) return done(err);
+                done();
+            }
+        ); 
+    });
 });
