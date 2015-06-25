@@ -20,14 +20,39 @@ controller('dashboardCtrl', ['$scope', 'eventHttpService',
 
   angular.extend($scope, {
     clickToS: function() {
+      var calculateToS = function(events, opt) {
+        var rs = [];
+        var tosObj = {};
+        var workflowGroups = _.groupBy(_.filter(events, function(event) {
+          var isSubpage = event.componentId.indexOf('Edit') !== -1;
+          return opt.isSubpage ? isSubpage : !isSubpage;
+        }), 'workflow');
+        var workflowFieldCallback = function(elem) {
+          return elem.timestamp;
+        };
+
+        for (var workflowKey in workflowGroups) {
+          tosObj = {
+            workflow: workflowKey,
+            tos: _.max(workflowGroups[workflowKey], workflowFieldCallback) -
+                _.min(workflowGroups[workflowKey], workflowFieldCallback)
+          };
+
+          rs.push(tosOjb);
+        }
+
+        return rs;
+      };
+
+
       $scope.metricType = 'ToS';
 
-      $scope.customSetMetrics = [{workflow: 'Geo', tos: 10}, {workflow: 'Daypart', tos: 20}];
+      $scope.customSetMetrics = calculateToS(totalEvents, { isSubpage: false });
       $scope.customSetLabels = _.pluck($scope.customSetMetrics, 'workflow');
       $scope.customSetToS = [_.pluck($scope.customSetMetrics, 'tos')];
       $scope.customSetColor = ['#f16463'];
 
-      $scope.subpageMetrics = [{workflow: 'Geo', tos: 30}, {workflow: 'Daypart', tos: 10}];
+      $scope.subpageMetrics = calculateToS(totalEvents, { isSubpage: true});
       $scope.subpageLabels = _.pluck($scope.subpageMetrics, 'workflow');
       $scope.subpageToS = [_.pluck($scope.subpageMetrics, 'tos')];
       $scope.subpageColor = ['#46b6ae'];
