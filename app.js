@@ -29,7 +29,8 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-var eventController = require('./controllers/user_event');
+var eventController = require('./controllers/event');
+var eventController1 = require('./controllers/user_event');
 
 /*
  * DataGeek controllers
@@ -117,13 +118,14 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-app.get('/getEvents', eventController.getEvents);
-app.post('/getEvents', eventController.postEvents);
+app.get('/getEvents', eventController1.getEvents);
+app.post('/getEvents', eventController1.postEvents);
 
 /*
  * DataGeek app routes.
  */
 app.get('/dashboard', dashboardController.getDashboard);
+app.get('/events', eventController.getEvents);
 
 /**
  * API examples routes.

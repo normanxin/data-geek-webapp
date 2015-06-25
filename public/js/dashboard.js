@@ -32,7 +32,7 @@ controller('dashboardCtrl', ['$scope', 'eventHttpService',
 
       eventQueryObj = JSON.parse($scope.eventQueryText);
 
-      eventHttpService.postEventQuery(eventQueryObj, function(data) {
+      eventHttpService.getEvents(function(data) {
         $scope.events = data;
       });
     }
@@ -49,9 +49,7 @@ controller('dashboardCtrl', ['$scope', 'eventHttpService',
   };
 }]).
 service('eventHttpService', ['$http', function($http) {
-  this.postEventQuery = function(eventQueryObj, onSuccess, onError) {
-    $http.post('/getEvents', eventQueryObj).
-        success(onSuccess).
-        error(onError);
+  this.getEvents = function(onSuccess, onError) {
+    $http.get('/events').success(onSuccess).error(onError);
   };
 }]);

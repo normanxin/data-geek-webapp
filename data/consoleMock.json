@@ -1,0 +1,6 @@
+[
+  {"timestamp": "1435214366527362","userId": "1002058","eventType": "keydown","componentId": "GeoSetsACText","session": "3C33A975-1912-4C81-BF49-2A0CDAABE8E3","workflow": "Geo"},
+  {"timestamp": "1435214881485505","userId": "1047786","eventType": "mousedown","componentId": "DaypartEditApplyButton","session": "8E143AD6-C601-4AA6-AEC1-0AD50DEC97AD","workflow": "Daypart"},
+  {"timestamp": "1435215046639511","userId": "1047786","eventType": "keydown","componentId": "DaypartEditLink","session": "8E143AD6-C601-4AA6-AEC1-0AD50DEC97AD","workflow": "InventoryList"},
+  {"timestamp": "1435215057729550","userId": "1047786","eventType": "mousedown","componentId": "SegmentsACText","session": "8E143AD6-C601-4AA6-AEC1-0AD50DEC97AD","workflow": "Segments"}
+]

@@ -4,14 +4,17 @@ block content
   div(ng-controller='dashboardCtrl')
     form
       div
-        button(type='submit' ng-click='submitEventQuery()') Submit
-      div: textarea(ng-model='eventQueryText')
-    table
+        div
+          h2.sectionheader Custom Query
+        div
+        button.btn.float-right.btn-primary.btn-submit.pull-right(type='submit' ng-click='submitEventQuery()') Submit
+      div: textarea.form-control.textarea-data(ng-model='eventQueryText')
+    table.table
       thead
         tr
           th
           th Workflow
-          th Section ID
+          th Session ID
           th Timestamp
           th Account ID
           th Component ID
@@ -20,21 +23,38 @@ block content
         tr(ng-repeat='event in events')
           td: input(type='checkbox')  
           td {{ event.workflow }}
-          td {{ event.sessionID }} 
+          td {{ event.session }} 
           td {{ event.timestamp }}
-          td {{ event.accountID }}
-          td {{ event.componentID }}
+          td {{ event.userId }}
+          td {{ event.componentId }}
           td {{ event.eventType }}
     div
-      label Metrics
+      div
+        h2.sectionheader Metrics
+      div
+      button.btn.btn-tos ToS
+      button.btn.btn-tssr TSSR
+      button.btn.btn-ar AR
       div
     div
       div
         input(type='checkbox')
-        label
+        label ToS: Targeting by Custom Set
       div
-        table
-        canvas
+        table.table
+          thead
+            tr
+              th Session ID
+              th Workflow
+              th Account ID
+              th ToS
+          tbody
+            tr(ng-repeat='event in events')
+              td {{ event.sessionID }} 
+              td {{ event.workflow }}
+              td {{ event.accountID }}
+              td {{ event.ToS }}
+        canvas.chart.chart-bar#bar(data='data' labels='labels')
     button Merge
         
     
