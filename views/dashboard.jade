@@ -1,6 +1,40 @@
 extends layout
 
 block content
-  div(ng-controller="dashboardCtrl")
-    canvas(id="line" class="chart chart-line" data="data" labels="labels" 
-        legend="true" series="series" click="onClick")
+  div(ng-controller='dashboardCtrl')
+    form
+      div
+        button(type='submit' ng-click='submitEventQuery()') Submit
+      div: textarea(ng-model='eventQueryText')
+    table
+      thead
+        tr
+          th
+          th Workflow
+          th Section ID
+          th Timestamp
+          th Account ID
+          th Component ID
+          th Event Type
+      tbody
+        tr(ng-repeat='event in events')
+          td: input(type='checkbox')  
+          td {{ event.workflow }}
+          td {{ event.sessionID }} 
+          td {{ event.timestamp }}
+          td {{ event.accountID }}
+          td {{ event.componentID }}
+          td {{ event.eventType }}
+    div
+      label Metrics
+      div
+    div
+      div
+        input(type='checkbox')
+        label
+      div
+        table
+        canvas
+    button Merge
+        
+    

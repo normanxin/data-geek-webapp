@@ -1,6 +1,43 @@
 var dataGeekApp = angular.module('dataGeekApp', ['chart.js']);
 
-dataGeekApp.controller('dashboardCtrl', ['$scope', function($scope) {
+dataGeekApp.
+controller('dashboardCtrl', ['$scope', 'eventHttpService',
+    function($scope, eventHttpService) {
+  angular.extend($scope, {
+    eventQueryText: '',
+    events: [
+      {
+        workflow: 'Geo',
+        sessionID: 1000,
+        timestamp: 20140109,
+        accountID: 'JieC',
+        componentID: 'segmentEditLink',
+        eventType: 'click'
+      },
+      {
+        workflow: 'Segment',
+        sessionID: 2000,
+        timestamp: 20150124,
+        accountID: 'AmandaL',
+        componentID: 'segmentEditLink',
+        eventType: 'mouse over'
+      }]
+  });
+
+  angular.extend($scope, {
+    submitEventQuery: function() {
+      var eventQueryObj;
+
+      if (!$scope.eventQueryText) { return; }
+
+      eventQueryObj = JSON.parse($scope.eventQueryText);
+
+      eventHttpService.postEventQuery(eventQueryObj, function(data) {
+        $scope.events = data;
+      });
+    }
+  });
+
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   $scope.series = ['Series A', 'Series B'];
   $scope.data = [
@@ -9,5 +46,12 @@ dataGeekApp.controller('dashboardCtrl', ['$scope', function($scope) {
   ];
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
+  };
+}]).
+service('eventHttpService', ['$http', function($http) {
+  this.postEventQuery = function(eventQueryObj, onSuccess, onError) {
+    $http.post('/getEvents', eventQueryObj).
+        success(onSuccess).
+        error(onError);
   };
 }]);
